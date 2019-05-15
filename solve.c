@@ -99,6 +99,7 @@ void	solve(char *line, t_tetris *tr)
 	print_map(map);
 	return ;
 }
+
 void	print_map(char **map)
 {
 	int i;
