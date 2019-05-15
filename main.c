@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 14:59:40 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/10 17:37:59 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/15 20:51:23 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int     main(int ac, char **av)
 {
-    	int fd;
-    	char *line;
-	char *mapi;
-	(void)ac;
+	char *line;
+	int fd;
 	t_tetris *tr;
-	int i;
 
+	if (ac != 2)
+	{
+		ft_putstr("usage: ./fillit file\n");
+		exit_error();
+	}
 	fd = open(av[1], O_RDONLY);
-    	if (fd < 0)
-        return (-1);
-   	 line = read_file(fd);
-  	ft_putstr(line);
-
-	ft_putstr("check_all:");
+	if (fd < 0)
+		exit_error();
+	line = read_file(fd);
 	check_all(line);
 	ft_putnbr(1);
-
-	tr = get_pos(line);
-    return (0);
+	tr = get_all_tetri(line);
+	ft_putnbr(2);
+	solve(line, tr);
+	return (0);
 }

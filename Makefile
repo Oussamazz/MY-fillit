@@ -1,5 +1,5 @@
 NAME = test
-SRC = main.c validate.c my_read.c map.c error.c
+SRC = main.c validate.c my_read.c map.c error.c solve.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 FLAGS = -Wextra

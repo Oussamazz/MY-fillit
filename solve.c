@@ -2,7 +2,6 @@
 
 #include "fillit.h"
 
-/* get all positions of all tetriminos */
 
 void	xy_tetr(t_tetris **tr, int x, int y)
 {
@@ -29,8 +28,9 @@ void	xy_tetr(t_tetris **tr, int x, int y)
 		i++;
 	}
 }
+/* get all positions of tetriminos */
 
-t_tetris	*get_all_tetri(char *line, int size)
+t_tetris	*get_all_tetri(char *line)
 {
 	t_tetris *tr;
 	char letter;
@@ -46,7 +46,7 @@ t_tetris	*get_all_tetri(char *line, int size)
 	ret = tr;
 	while (tetri_count--)
 	{
-		tr = get_tetri(&line[add21] , letter);
+		tr = get_pos(ft_strsub(line, add21, 20) , letter);
 		letter++;
 		add21 += 21;
 		if (!(tr->next = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
@@ -61,9 +61,11 @@ char	**solver(char **map, t_tetris *tr, int size)
 {
 	int x;
 	int y;
+	char **result;
 	if (tr->next == NULL)
 		return (map);
 	x = 0;
+	result = NULL;
 	while (x < size)
 	{
 		y = 0;
@@ -71,9 +73,9 @@ char	**solver(char **map, t_tetris *tr, int size)
 		{
 			xy_tetr(&tr, x, y);
 			if (check_tetri(map, tr, size))
-				map = solver((inser_tetri(map, tr, size)), tr->next, size);
-			if (map)
-				return map;
+				result = solver((insert_tetri(map, tr, size)), tr->next, size);
+			if (result)
+				return (result);
 			map = remove_tetri(map, tr, size);
 			y++;
 		}
@@ -87,16 +89,18 @@ void	solve(char *line, t_tetris *tr)
 {
 	int size;
 	char **map;
+	char **result;
 
 	size = ft_sqrt(count_tetri(line) * 4);
 	map = tetri_map_init(size);
-	while (!(map = solver(map, tr, size)))
+	result = NULL;
+	while (!(result = solver(map, tr, size)))
 	{
 		size++;
-		ft_strdel(&map);
+		ft_strdel(map);
 		map = tetri_map_init(size);
 	}
-	print_map(map);
+	print_map(result);
 	return ;
 }
 

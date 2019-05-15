@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/15 02:40:57 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/15 20:45:04 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,13 @@ char	**insert_tetri(char **map, t_tetris *tr, int size)
 
 /* removing a tetrimino */
 
-char	**remove_tetri(char **map, t_tetris *tr, int size, int posx, int posy)
+char	**remove_tetri(char **map, t_tetris *tr, int size)
 {
 	int x;
 	int y;
 	int i;
 
-	i = 0;
-	x = posx;
-	y = posy;
+	i = x = 0;
 	while (x < size)
 	{
 		y = 0;

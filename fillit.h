@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 15:12:01 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/15 01:45:07 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/15 21:01:12 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ typedef struct s_tetris
     struct s_tetris *next;
 }              t_tetris;
 t_tetris	*get_pos(char *arr, char c);
-char	*initialize_map(int size_map);
-void	set_tetri(char **map, t_tetris **tetri, int map_size);
+t_tetris	*get_all_tetri(char *line);
+void		xy_tetr(t_tetris **tr, int x, int y);
+int			check_tetri(char **map, t_tetris *tr, int size);
+char	**tetri_map_init(int size);
+char	**insert_tetri(char **map, t_tetris *tr, int size);
+char	**remove_tetri(char **map, t_tetris *tr, int size);
 char	**solver(char **map, t_tetris *tr, int size);
+void	solve(char *line, t_tetris *tr);
+void	print_map(char **map);
 #endif
