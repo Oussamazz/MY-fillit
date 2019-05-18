@@ -17,7 +17,7 @@ OBJ = ./ft_*.o
 INCLUDE = ./libft.h
 
 $(NAME): 
-	gcc $(FLAGS) $(FILE) -c -I $(INCLUDE)
+	gcc $(FLAGS) $(FILE) -c $(INCLUDE)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 all : $(NAME)

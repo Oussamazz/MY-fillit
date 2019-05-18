@@ -26,7 +26,7 @@ void	is_invalid_char(char c);
 int		count_tetri(char *arr);
 void	check_tetri_count(int tetri_count);
 void	check_tags_pos(char *arr);
-void	check_tags_count(char *arr, int len);
+void	check_tags_count(char *arr);
 void	check_all(char *arr);
 void	exit_error(void);
 typedef struct s_tetris

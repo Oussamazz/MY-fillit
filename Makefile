@@ -7,7 +7,7 @@ FLAGS = -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) libft.a  -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) ./libft/libft.a  -o $(NAME)
 $(OBJ): $(SRC)
 	$(CC) $(FLAGS) -c $(SRC)
 clean:

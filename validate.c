@@ -18,7 +18,7 @@ void		check_tetri_count(int tetri_count)
 		exit_error();
 }
 
-void		check_tags_count(char *arr, int len)
+void		check_tags_count(char *arr)
 {
 	int newlines;
 	int tags;
@@ -29,7 +29,7 @@ void		check_tags_count(char *arr, int len)
 	newlines = 0;
 	if (arr == NULL)
 		exit_error();
-	while(*arr && len)
+	while(*arr)
 	{
 		if (*arr == '#')
 			tags++;
@@ -38,7 +38,6 @@ void		check_tags_count(char *arr, int len)
 		else if(*arr == '.')
 			dots++;
 		arr++;
-		len--;
 	}
 	if (tags != 4 || newlines != 4 || dots != 12)
 		exit_error();
@@ -53,7 +52,7 @@ void		check_tags_pos(char *arr)
 	touch = 0;
 	if (arr)
 	{
-		while (arr[j] && j <= 20)
+		while (arr[j])
 		{
 			if(arr[j] == '#')
 			{
@@ -69,7 +68,10 @@ void		check_tags_pos(char *arr)
 			j++;
 		}
 		if (!(touch == 6 || touch == 8))
+		{
+			ft_putnbr(touch);
 			exit_error();
+		}
 		return ;
 	}
 	exit_error();
@@ -105,13 +107,17 @@ void		check_all(char *arr)
 	int i;
 	int size;
 	int add21;
+	char *tmp;
 
+	tmp = NULL;
 	check_tetri_count(count_tetri(arr));
 	add21 = 0;
 	while (arr[add21] != '\0')
 	{
-		check_tags_count(&arr[add21], 20);
-		check_tags_pos(&arr[add21]);
+		tmp = ft_strsub(arr, add21, 20);
+		check_tags_count(tmp);
+		check_tags_pos(tmp);
+		ft_strdel(&tmp);
 		add21 += 21;
 	}
 }
