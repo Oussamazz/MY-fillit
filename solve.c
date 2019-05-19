@@ -73,7 +73,7 @@ char	**solver(char **map, t_tetris *tr, int size)
 		y = 0;
 		while (y < size)
 		{
-			xy_tetr(&tr, y, x);
+			xy_tetr(&tr, x, y);
 			if (check_tetri(map, tr, size))
 				result = solver((insert_tetri(map, tr, size)), tr->next, size);
 			if (result)

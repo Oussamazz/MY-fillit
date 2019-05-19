@@ -23,21 +23,23 @@ void		check_tags_count(char *arr)
 	int newlines;
 	int tags;
 	int dots;
+	int len;
 
 	dots = 0;
 	tags = 0;
+	len = 0;
 	newlines = 0;
 	if (arr == NULL)
 		exit_error();
-	while(*arr)
+	while(arr[len] != '\0' && len <= 19)
 	{
-		if (*arr == '#')
+		if (arr[len] == '#')
 			tags++;
-		if (*arr == '\n')
+		if (arr[len] == '\n')
 			newlines++;
-		else if(*arr == '.')
+		if(arr[len] == '.')
 			dots++;
-		arr++;
+		len++;
 	}
 	if (tags != 4 || newlines != 4 || dots != 12)
 		exit_error();
@@ -107,9 +109,11 @@ void		check_all(char *arr)
 	while (arr[add21] != '\0')
 	{
 		tmp = ft_strsub(arr, add21, 20);
-		check_tags_count(tmp);
+		check_tags_count(&arr[add21]);
 		check_tags_pos(tmp);
 		ft_strdel(&tmp);
 		add21 += 21;
 	}
+	if (arr[add21 - 1] != '\0')
+		exit_error();
 }

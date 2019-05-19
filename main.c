@@ -29,6 +29,7 @@ int     main(int ac, char **av)
 		exit_error();
 	line = read_file(fd);
 	check_all(line);
+	ft_putnbr(1);
 	tr = get_all_tetri(line);
 	solve(3, tr);
 	return (0);
