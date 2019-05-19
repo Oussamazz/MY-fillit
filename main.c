@@ -17,7 +17,8 @@ int     main(int ac, char **av)
 	char *line;
 	int fd;
 	t_tetris *tr;
-
+	
+	tr = NULL;
 	if (ac != 2)
 	{
 		ft_putstr("usage: ./fillit file\n");
@@ -28,6 +29,7 @@ int     main(int ac, char **av)
 		exit_error();
 	line = read_file(fd);
 	check_all(line);
-	ft_putnbr(1);
+	tr = get_all_tetri(line);
+	solve(3, tr);
 	return (0);
 }

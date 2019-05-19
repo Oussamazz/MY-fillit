@@ -36,14 +36,14 @@ typedef struct s_tetris
     int     y[4];
     struct s_tetris *next;
 }              t_tetris;
-t_tetris	*get_pos(char *arr, char c);
+void		get_pos(t_tetris **tr, char *arr, char c);
 t_tetris	*get_all_tetri(char *line);
 void		xy_tetr(t_tetris **tr, int x, int y);
 int			check_tetri(char **map, t_tetris *tr, int size);
-char	**tetri_map_init(int size);
+char	**tetri_map_init(char **map, int size);
 char	**insert_tetri(char **map, t_tetris *tr, int size);
 char	**remove_tetri(char **map, t_tetris *tr, int size);
 char	**solver(char **map, t_tetris *tr, int size);
-void	solve(char *line, t_tetris *tr);
+void	solve(int size, t_tetris *tr);
 void	print_map(char **map);
 #endif

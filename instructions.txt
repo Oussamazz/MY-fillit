@@ -1,6 +1,0 @@
-1. Check if a single piece fits on a board, and if so, place that piece on the first available spot on the board. Repeat until the board is full.
-
-2. If the board is full and a solution has not been found, undo the last piece placed on the board and try a different position for it. Repeat until all possible positions for all tetromino pieces have been tried.
-
-3. If all possible solutions on a board have been tried, increase the size of the board and start over with placing the first tetromino. Note that the smallest possible board size is 2x2 as defined by the square tetromino by itself.
-

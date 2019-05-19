@@ -12,7 +12,7 @@ void	xy_tetr(t_tetris **tr, int x, int y)
 	min_x = 11;
 	min_y = 11;
 	i = 0;
-	while (i <= 3)
+	while (i < 4)
 	{
 		if (min_x > (*tr)->x[i])
 			min_x = (*tr)->x[i];
@@ -36,24 +36,26 @@ t_tetris	*get_all_tetri(char *line)
 	char letter;
 	int add21;
 	int tetri_count;
-	t_tetris *ret;
+	t_tetris *tmp;
 
 	tetri_count = count_tetri(line);
 	add21 = 0;
 	letter = 'A';
 	if(!(tr = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
 			return (NULL);
-	ret = tr;
-	while (tetri_count--)
+	tmp = tr;
+	while (tetri_count > 0)
 	{
-		tr = get_pos(ft_strsub(line, add21, 20) , letter);
+		get_pos(&tmp, ft_strsub(line, add21, 20) , letter);
 		letter++;
 		add21 += 21;
-		if (!(tr->next = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
+		tetri_count--;
+		if (!(tmp->next = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
 			return (NULL);
-		tr = tr->next;
+		tmp = tmp->next;
 	}
-	return (ret);
+	tmp->next = NULL;
+	return (tr);
 }
 
 
@@ -71,7 +73,7 @@ char	**solver(char **map, t_tetris *tr, int size)
 		y = 0;
 		while (y < size)
 		{
-			xy_tetr(&tr, x, y);
+			xy_tetr(&tr, y, x);
 			if (check_tetri(map, tr, size))
 				result = solver((insert_tetri(map, tr, size)), tr->next, size);
 			if (result)
@@ -85,20 +87,19 @@ char	**solver(char **map, t_tetris *tr, int size)
 }
 
 
-void	solve(char *line, t_tetris *tr)
+void	solve(int size, t_tetris *tr)
 {
-	int size;
 	char **map;
 	char **result;
-
-	size = ft_sqrt(count_tetri(line) * 4);
-	map = tetri_map_init(size);
+	
+	map = NULL;
+	map = tetri_map_init(map, size);
 	result = NULL;
 	while (!(result = solver(map, tr, size)))
 	{
 		size++;
 		ft_strdel(map);
-		map = tetri_map_init(size);
+		map = tetri_map_init(map, size);
 	}
 	print_map(result);
 	return ;
@@ -107,7 +108,9 @@ void	solve(char *line, t_tetris *tr)
 void	print_map(char **map)
 {
 	int i;
-
+	
+	if (map == NULL)
+		exit_error();
 	i = 0;
 	while (map[i])
 	{

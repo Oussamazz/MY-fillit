@@ -79,26 +79,18 @@ void		check_tags_pos(char *arr)
 
 int	check_tetri(char **map, t_tetris *tr, int size)
 {
-	int x;
-	int y;
 	int i;
+	int count;
 
-	x = i = 0;
-	while (x < size)
+	i = 0;
+	count = 0;
+	while (i < 4)
 	{
-		y = 0;
-		while (y < size)
-		{
-			if (tr->x[i] < size && tr->y[i] < size && map[tr->x[i]][tr->y[i]] == '.')
-			{
-				i++;
-				if (i == 4)
-					return (1);
-			}
-			y++;
-		}
-		x++;
-	}
+		if (tr->x[i] < size && tr->y[i] < size && map[tr->y[i]][tr->x[i]] == '.')
+			count++;
+		if (count == 4)
+			return (1);
+	}	
 	return (0);
 }
 

@@ -27,14 +27,14 @@ int		ft_sqrt(int n)
 }
  
  /* final_map */
-char	**tetri_map_init(int size)
+char	**tetri_map_init(char **map, int size)
 {
 	int x;
 	int y;
-	char **map;
 
 	if(!(map = ft_memalloc(sizeof(char*) * size + 1)))
 		return (NULL);
+	x = 0;
 	while (x < size)
 	{
 		if (!(map[x] = ft_memalloc(sizeof(char) * size + 1)))
@@ -45,6 +45,7 @@ char	**tetri_map_init(int size)
 			map[x][y] = '.';
 			y++;
 		}
+		map[x][y] = '\0';
 		x++;
 	}
 	map[x] = NULL;
@@ -58,13 +59,14 @@ char	**insert_tetri(char **map, t_tetris *tr, int size)
 	int y;
 	int i;
 
-	i = x = 0;
+	i = 0;
+	x = 0;
 	while (x < size)
 	{
 		y = 0;
 		while (y < size)
 		{
-			if (tr->x[i] == x && tr->y[i] == y)
+			if (tr->x[i] == y && tr->y[i] == x)
 			{
 				map[x][y] = tr->c;
 				i++;
@@ -84,52 +86,40 @@ char	**remove_tetri(char **map, t_tetris *tr, int size)
 {
 	int x;
 	int y;
-	int i;
 
-	i = x = 0;
+	x = 0;
 	while (x < size)
 	{
 		y = 0;
 		while (y < size)
 		{
 			if (map[x][y] == tr->c)
-			{
 				map[x][y] = '.';
-				i++;
-				if (i == 4)
-					return (map);
-			}
 			y++;
 		}
 		x++;
 	}
 	return (map);
-
 }
 
 /* get (x, y) of every tags of a tetrimino */
-t_tetris	*get_pos(char *arr, char c)
+void		get_pos(t_tetris **tr, char *arr, char c)
 {
 	int i;
 	int j;
-	t_tetris *tetris;
 
-	tetris = (t_tetris*)ft_memalloc(sizeof(t_tetris));
-	if (!tetris)
-		return (NULL);
 	i = 0;
 	j = 0;
-	tetris->c = c;
-	while (arr[i] && j <= 3 && i <= 19)
+	(*tr)->c = c;
+	while (arr[i] && j <= 3)
 	{
 		if (arr[i] == '#')
 		{
-			tetris->x[j] = i / 5;
-			tetris->y[j] = i % 5;
+			(*tr)->x[j] = i % 5;
+			(*tr)->y[j] = i / 5;
 			j++;
 		}
 		i++;
 	}
-	return (tetris);
 }
 
