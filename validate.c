@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:00:36 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/20 21:29:50 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/20 23:02:01 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		check_tags_count(char *arr)
 	{
 		if (arr[len] == '#')
 			tags++;
-		if (arr[len] == '\n')
+		if (arr[len] == '\n' && (len % 5) == 4)
 			newlines++;
 		if(arr[len] == '.')
 			dots++;
