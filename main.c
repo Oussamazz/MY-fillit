@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 14:59:40 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/15 20:51:23 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/20 09:40:48 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int     main(int ac, char **av)
 		exit_error();
 	line = read_file(fd);
 	check_all(line);
-	ft_putnbr(1);
 	tr = get_all_tetri(line);
 	solve(3, tr);
 	return (0);

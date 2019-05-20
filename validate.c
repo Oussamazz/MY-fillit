@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:00:36 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/15 01:39:40 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:29:50 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		check_tetri_count(int tetri_count)
 {
-	if (!(1 <= tetri_count || tetri_count <= 26))
+	if (!(1 <= tetri_count && tetri_count <= 26))
 		exit_error();
 }
 
@@ -79,20 +79,21 @@ void		check_tags_pos(char *arr)
 	exit_error();
 }
 
-int	check_tetri(char **map, t_tetris *tr, int size)
+int		check_tetri(char **map, t_tetris *tetri, int size)
 {
 	int i;
 	int count;
 
-	i = 0;
 	count = 0;
+	i = 0;
 	while (i < 4)
 	{
-		if (tr->x[i] < size && tr->y[i] < size && map[tr->y[i]][tr->x[i]] == '.')
+		if (tetri->x[i] < size && tetri->y[i] < size && map[tetri->y[i]][tetri->x[i]] == '.')
 			count++;
-		if (count == 4)
-			return (1);
-	}	
+		i++;
+	}
+	if (count == 4)
+		return (1);
 	return (0);
 }
 

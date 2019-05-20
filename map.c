@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/15 20:45:04 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:12:24 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,55 @@ char	**tetri_map_init(char **map, int size)
 }
 
 /* insert a tetrimino */
-char	**insert_tetri(char **map, t_tetris *tr, int size)
+char	**insert_tetri(char **map, t_tetris *tr, int size, int y, int x)
 {
-	int x;
-	int y;
 	int i;
+	int count;
 
+	count = 0;
 	i = 0;
-	x = 0;
-	while (x < size)
+	while (y < size)
 	{
-		y = 0;
-		while (y < size)
+		while (x < size)
 		{
-			if (tr->x[i] == y && tr->y[i] == x)
+			if (tr->y[i] == y && tr->x[i] == x && map[y][x] == '.')
 			{
-				map[x][y] = tr->c;
+				map[y][x] = tr->c;
 				i++;
-				if (i == 4)
-					return (map);
+				count++;
 			}
-			y++;
+			if (count == 4)
+				return (map);
+			x++;
 		}
-		x++;
+		y++;
+		x = 0;
 	}
 	return (map);
 }
 
 /* removing a tetrimino */
 
-char	**remove_tetri(char **map, t_tetris *tr, int size)
+char	**remove_tetri(char **map, t_tetris *tr, int size, int y, int x)
 {
-	int x;
-	int y;
+	int count;
 
-	x = 0;
-	while (x < size)
+	count = 0;
+	while (y < size)
 	{
-		y = 0;
-		while (y < size)
+		while (x < size)
 		{
 			if (map[x][y] == tr->c)
+			{
 				map[x][y] = '.';
-			y++;
+				count++;
+			}
+			if (count == 4)
+				return (map);
+			x++;
 		}
-		x++;
+		y++;
+		x = 0;
 	}
 	return (map);
 }
@@ -111,7 +115,7 @@ void		get_pos(t_tetris **tr, char *arr, char c)
 	i = 0;
 	j = 0;
 	(*tr)->c = c;
-	while (arr[i] && j <= 3)
+	while (arr[i] != '\0')
 	{
 		if (arr[i] == '#')
 		{
@@ -122,4 +126,3 @@ void		get_pos(t_tetris **tr, char *arr, char c)
 		i++;
 	}
 }
-
