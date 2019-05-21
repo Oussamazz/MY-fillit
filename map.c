@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/20 21:12:24 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:25:48 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,17 @@ char	**tetri_map_init(char **map, int size)
 }
 
 /* insert a tetrimino */
-char	**insert_tetri(char **map, t_tetris *tr, int size, int y, int x)
+char	**insert_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 {
 	int i;
+	int x;
+	int y;
 	int count;
 
 	count = 0;
 	i = 0;
+	y = pos_y;
+	x = pos_x;
 	while (y < size)
 	{
 		while (x < size)
@@ -82,18 +86,22 @@ char	**insert_tetri(char **map, t_tetris *tr, int size, int y, int x)
 
 /* removing a tetrimino */
 
-char	**remove_tetri(char **map, t_tetris *tr, int size, int y, int x)
+char	**remove_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 {
+	int x;
+	int y;
 	int count;
 
 	count = 0;
+	y = pos_y;
+	x = pos_x;
 	while (y < size)
 	{
 		while (x < size)
 		{
-			if (map[x][y] == tr->c)
+			if (map[y][x] == tr->c)
 			{
-				map[x][y] = '.';
+				map[y][x] = '.';
 				count++;
 			}
 			if (count == 4)
@@ -111,6 +119,8 @@ void		get_pos(t_tetris **tr, char *arr, char c)
 {
 	int i;
 	int j;
+	int pos_x;
+	int pos_y;
 
 	i = 0;
 	j = 0;

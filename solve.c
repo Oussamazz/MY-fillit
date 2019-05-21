@@ -6,47 +6,48 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 00:05:37 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/20 21:44:36 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/21 20:24:54 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	    xy_tetri(t_tetris **tetri, int x, int y)
+void		adjust_tetri(t_tetris **tr, int y, int x)
 {
-	int	pos_x;
+	int pos_x;
 	int pos_y;
 	int i;
 
 	i = 0;
-	pos_x = 100;
-	pos_y = 100;
+	pos_x = 69;
+	pos_y = 69;
 	while (i < 4)
 	{
-		if ((*tetri)->x[i] < pos_x)
-			pos_x = (*tetri)->x[i];
-		if ((*tetri)->y[i] < pos_y)
-			pos_y = (*tetri)->y[i];
+		if (pos_x > (*tr)->x[i])
+			pos_x = (*tr)->x[i];
+		if (pos_y > (*tr)->y[i])
+			pos_y = (*tr)->y[i];
 		i++;
 	}
-	i--;
-	while (i >= 0)
+	i = 0;
+	while (i < 4)
 	{
-		(*tetri)->x[i] = (*tetri)->x[i] - pos_x + x;
-		(*tetri)->y[i] = (*tetri)->y[i] - pos_y + y;
-		i--;
+		(*tr)->x[i] = (*tr)->x[i] - pos_x + x;
+		(*tr)->y[i] = (*tr)->y[i] - pos_y + y;
+		i++;
 	}
 }
 /* get all positions of tetriminos */
 
 t_tetris	*get_all_tetri(char *line)
 {
-	t_tetris *tr;
-	char letter;
 	int add21;
 	int tetri_count;
+	char letter;
+	t_tetris *tr;
 	t_tetris *tmp;
 
+	tmp = NULL;
 	tetri_count = count_tetri(line);
 	add21 = 0;
 	letter = 'A';
@@ -67,11 +68,12 @@ t_tetris	*get_all_tetri(char *line)
 	return (tr);
 }
 
-
 char	**solver(char **map, t_tetris *tr, int size)
 {
 	int x;
 	int y;
+	int pos_x;
+	int pos_y;
 	char **result;
 	if (tr->next == NULL)
 		return (map);
@@ -82,12 +84,14 @@ char	**solver(char **map, t_tetris *tr, int size)
 		x = 0;
 		while (x < size)
 		{
-			xy_tetri(&tr, x, y);
-			if (check_tetri(map, tr, size))
-				result = solver((insert_tetri(map, tr, size, y, x)), tr->next, size);
+			pos_y = y;
+			pos_x = x;
+			adjust_tetri(&tr, y, x);
+			if (check_tetri(map, tr, size, &pos_y, &pos_x))
+				result = solver((insert_tetri(map, tr, size, pos_y, pos_x)), tr->next, size);
 			if (result)
 				return (result);
-			map = remove_tetri(map, tr, size, y, x);
+			map = remove_tetri(map, tr, size, pos_y, pos_x);
 			x++;
 		}
 		y++;

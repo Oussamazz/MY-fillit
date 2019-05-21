@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 14:59:40 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/20 09:40:48 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/21 16:24:13 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int     main(int ac, char **av)
 {
-	char *line;
 	int fd;
+	int size;
+	char *line;
 	t_tetris *tr;
 	
+	size = 0;
 	tr = NULL;
 	if (ac != 2)
 	{
@@ -30,6 +32,7 @@ int     main(int ac, char **av)
 	line = read_file(fd);
 	check_all(line);
 	tr = get_all_tetri(line);
-	solve(3, tr);
+	size = ft_sqrt(count_tetri(line) * 4);
+	solve(size, tr);
 	return (0);
 }
