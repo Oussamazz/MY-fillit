@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/21 21:12:01 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/23 21:54:10 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_sqrt(int n)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i <= n / 2)
@@ -25,14 +25,13 @@ int		ft_sqrt(int n)
 	}
 	return (-1);
 }
- 
- /* final_map */
+
 char	**tetri_map_init(char **map, int size)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
-	if(!(map = ft_memalloc(sizeof(char*) * size + 1)))
+	if (!(map = ft_memalloc(sizeof(char*) * size + 1)))
 		return (NULL);
 	x = 0;
 	while (x < size)
@@ -52,45 +51,39 @@ char	**tetri_map_init(char **map, int size)
 	return (map);
 }
 
-/* insert a tetrimino */
 char	**insert_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 {
-	int i;
-	int x;
-	int y;
-	int count;
+	int	i;
+	int	count;
 
 	count = 0;
 	i = 0;
-	y = pos_y;
-	x = pos_x;
-	while (y < size)
+	while (pos_y < size)
 	{
-		while (x < size)
+		while (pos_x < size)
 		{
-			if (tr->y[i] == y && tr->x[i] == x && map[y][x] == '.')
+			if (tr->y[i] == pos_y && tr->x[i] == pos_x
+				&& map[pos_y][pos_x] == '.')
 			{
-				map[y][x] = tr->c;
+				map[pos_y][pos_x] = tr->c;
 				i++;
 				count++;
 			}
 			if (count == 4)
 				return (map);
-			x++;
+			pos_x++;
 		}
-		y++;
-		x = 0;
+		pos_y++;
+		pos_x = 0;
 	}
 	return (map);
 }
 
-/* removing a tetrimino */
-
 char	**remove_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 {
-	int x;
-	int y;
-	int count;
+	int	x;
+	int	y;
+	int	count;
 
 	count = 0;
 	y = pos_y;
@@ -114,11 +107,10 @@ char	**remove_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 	return (map);
 }
 
-/* get (x, y) of every tags of a tetrimino */
-void		get_pos(t_tetris **tr, char *arr, char c)
+void	get_pos(t_tetris **tr, char *arr, char c)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;

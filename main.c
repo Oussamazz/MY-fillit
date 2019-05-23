@@ -6,19 +6,19 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 14:59:40 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/22 23:00:17 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/23 21:40:26 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int     main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	int fd;
-	int size;
-	char *line;
-	t_tetris *tr;
-	
+	int			fd;
+	int			size;
+	char		*line;
+	t_tetris	*tr;
+
 	size = 0;
 	tr = NULL;
 	if (ac != 2)
