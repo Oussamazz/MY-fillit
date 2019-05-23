@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/21 20:25:48 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/21 21:12:01 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ void		get_pos(t_tetris **tr, char *arr, char c)
 {
 	int i;
 	int j;
-	int pos_x;
-	int pos_y;
 
 	i = 0;
 	j = 0;

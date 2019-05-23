@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 14:59:40 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/21 16:24:13 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/22 23:00:17 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int     main(int ac, char **av)
 	tr = NULL;
 	if (ac != 2)
 	{
-		ft_putstr("usage: ./fillit file\n");
-		exit_error();
+		ft_putendl_fd("usage: ./fillit file", 1);
+		exit(EXIT_SUCCESS);
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)

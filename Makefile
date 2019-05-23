@@ -1,4 +1,4 @@
-NAME = test
+NAME = fillit
 SRC = main.c validate.c my_read.c map.c error.c solve.c
 OBJ = $(SRC:.c=.o)
 CC = gcc

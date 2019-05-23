@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:46:59 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/05/10 15:49:28 by mel-idri         ###   ########.fr       */
+/*   Updated: 2019/05/22 22:58:21 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	exit_error(void)
 {
-	ft_putendl_fd("Error", 2);
-	exit(1);
+	ft_putendl_fd("error", 1);
+	exit(EXIT_SUCCESS);
 }
