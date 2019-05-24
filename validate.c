@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:00:36 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/24 17:35:19 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/24 22:10:53 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int		check_tetri(char **map, t_tetris *tetri, int size)
 
 void		check_all(char *arr)
 {
-	int i;
-	int size;
 	int add21;
 	char *tmp;
 

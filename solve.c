@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 00:05:37 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/24 17:30:29 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/24 22:32:44 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		adjust_tetri(t_tetris **tr, int y, int x)
 {
-	int pos_x;
-	int pos_y;
-	int i;
+	int		pos_x;
+	int		pos_y;
+	int		i;
 
 	i = 0;
 	pos_x = 69;
@@ -37,26 +37,25 @@ void		adjust_tetri(t_tetris **tr, int y, int x)
 		i++;
 	}
 }
-/* get all positions of tetriminos */
 
 t_tetris	*get_all_tetri(char *line)
 {
-	int add21;
-	int tetri_count;
-	char letter;
-	t_tetris *tr;
-	t_tetris *tmp;
+	int			add21;
+	int			tetri_count;
+	char		letter;
+	t_tetris	*tr;
+	t_tetris	*tmp;
 
 	tmp = NULL;
 	tetri_count = count_tetri(line);
 	add21 = 0;
 	letter = 'A';
-	if(!(tr = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
-			return (NULL);
+	if (!(tr = (t_tetris*)ft_memalloc(sizeof(t_tetris))))
+		return (NULL);
 	tmp = tr;
 	while (tetri_count > 0)
 	{
-		get_pos(&tmp, ft_strsub(line, add21, 20) , letter);
+		get_pos(&tmp, ft_strsub(line, add21, 20), letter);
 		letter++;
 		add21 += 21;
 		tetri_count--;
@@ -68,14 +67,13 @@ t_tetris	*get_all_tetri(char *line)
 	return (tr);
 }
 
-char	**solver(char **map, t_tetris *tr, int size)
+char		**solver(char **map, t_tetris *tr, int size)
 {
-	int x;
-	int y;
-	int pos_x;
-	int pos_y;
-	int flag;
-	char **result;
+	int		x;
+	int		y;
+	int		flag;
+	char	**result;
+
 	if (tr->next == NULL)
 		return (map);
 	y = 0;
@@ -89,28 +87,24 @@ char	**solver(char **map, t_tetris *tr, int size)
 			tr->pos_x = x;
 			flag = 0;
 			adjust_tetri(&tr, y, x);
-			if (check_tetri(map, tr, size))
-			{
+			if ((flag = check_tetri(map, tr, size)))
 				result = solver((insert_tetri(map, tr, size)), tr->next, size);
-				flag = 1;
-			}
 			if (result)
 				return (result);
 			if (flag)
 				map = remove_tetri(map, tr, size);
-			x++;
+			x++;		
 		}
 		y++;
 	}
 	return (NULL);
 }
 
-
-void	solve(int size, t_tetris *tr)
+void		solve(int size, t_tetris *tr)
 {
-	char **map;
-	char **result;
-	
+	char	**map;
+	char	**result;
+
 	map = NULL;
 	map = tetri_map_init(map, size);
 	result = NULL;
@@ -122,18 +116,4 @@ void	solve(int size, t_tetris *tr)
 	}
 	print_map(result);
 	return ;
-}
-
-void	print_map(char **map)
-{
-	int i;
-	
-	if (map == NULL)
-		exit_error();
-	i = 0;
-	while (map[i])
-	{
-		ft_putendl(map[i]);
-		i++;
-	}
 }
