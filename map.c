@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 15:09:45 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/23 21:54:10 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:08:38 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ char	**tetri_map_init(char **map, int size)
 	return (map);
 }
 
-char	**insert_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
+char	**insert_tetri(char **map, t_tetris *tr, int size)
 {
 	int	i;
 	int	count;
+	int pos_y;
+	int pos_x;
 
+	pos_x = tr->pos_x;
+	pos_y = tr->pos_y;
 	count = 0;
 	i = 0;
 	while (pos_y < size)
@@ -79,15 +83,15 @@ char	**insert_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
 	return (map);
 }
 
-char	**remove_tetri(char **map, t_tetris *tr, int size, int pos_y, int pos_x)
+char	**remove_tetri(char **map, t_tetris *tr, int size)
 {
 	int	x;
 	int	y;
 	int	count;
 
 	count = 0;
-	y = pos_y;
-	x = pos_x;
+	y = tr->pos_y;
+	x = tr->pos_x;
 	while (y < size)
 	{
 		while (x < size)

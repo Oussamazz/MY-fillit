@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 00:05:37 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/22 23:48:25 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:30:29 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,19 @@ char	**solver(char **map, t_tetris *tr, int size)
 		x = 0;
 		while (x < size)
 		{
-			pos_y = y;
-			pos_x = x;
+			tr->pos_y = y;
+			tr->pos_x = x;
 			flag = 0;
 			adjust_tetri(&tr, y, x);
-			if (check_tetri(map, tr, size, &pos_y, &pos_x))
+			if (check_tetri(map, tr, size))
 			{
-				result = solver((insert_tetri(map, tr, size, pos_y, pos_x)), tr->next, size);
+				result = solver((insert_tetri(map, tr, size)), tr->next, size);
 				flag = 1;
 			}
 			if (result)
 				return (result);
 			if (flag)
-				map = remove_tetri(map, tr, size, pos_y, pos_x);
+				map = remove_tetri(map, tr, size);
 			x++;
 		}
 		y++;
