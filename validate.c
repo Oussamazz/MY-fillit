@@ -6,7 +6,7 @@
 /*   By: oelazzou <oelazzou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:00:36 by oelazzou          #+#    #+#             */
-/*   Updated: 2019/05/24 22:10:53 by oelazzou         ###   ########.fr       */
+/*   Updated: 2019/05/26 21:16:57 by oelazzou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void		check_all(char *arr)
 	tmp = NULL;
 	check_tetri_count(count_tetri(arr));
 	add21 = 0;
-	while (arr[add21] != '\0')
+	while (add21 == 0 || arr[add21 - 1] == '\n')
 	{
 		tmp = ft_strsub(arr, add21, 20);
 		check_tags_count(&arr[add21]);
